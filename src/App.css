@@ -1,38 +1,211 @@
-.App {
+/* General styling for the application */
+.app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  color: #333;
+  padding: 20px;
+}
+
+/* Styling for the main content areas */
+.main-content {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+/* Shared styles for product-list, cart, and checkout sections */
+.product-list, .cart, .checkout {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 30%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #007BFF;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #0056b3;
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+h3 {
+  color: #333;
+  font-size: 1.4em;
+  margin-top: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+/* Buttons styling */
+button {
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Specific button groups styling */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.add-to-cart-btn, .edit-btn {
+  margin-left: 10px;
+}
+
+/* Remove button styling */
+.remove-btn {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+/* Clear cart button styling */
+.clear-btn {
+  background-color: #ffc107;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.clear-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Input fields styling */
+input[type="text"], input[type="number"] {
+  margin: 5px 0;
+  padding: 10px;
+  width: calc(100% - 24px);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.product-list input[type="text"] {
+  margin-bottom: 10px;
+}
+
+/* Specific styles for Cart component */
+.cart input[type="number"] {
+  width: 60px;
+  margin: 0 10px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Styles for list items */
+li {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
 }
 
-.App-link {
-  color: #61dafb;
+li:last-child {
+  border-bottom: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Additional styles for headings */
+h1, h2, h3 {
+  margin: 0;
+}
+
+/* Add Product form styling */
+.add-product-form {
+  margin: 10px 0;
+}
+
+/* Edit Product form styling */
+.edit-product {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  z-index: 1000;
+}
+
+/* Specific styles for product item */
+.product-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-name {
+  flex: 2;
+}
+
+.product-price {
+  flex: 1;
+  text-align: right;
+  margin-right: 10px;
+}
+
+/* Specific styles for cart item */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-item-name {
+  flex: 2;
+}
+
+.cart-item-price, .cart-item-total {
+  flex: 1;
+  text-align: right;
+  margin-right: 10px;
+}
+
+/* Specific styles for cart total */
+.cart-total {
+  margin-top: 20px;
+  text-align: center;
 }
