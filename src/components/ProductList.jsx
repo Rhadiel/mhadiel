@@ -40,7 +40,7 @@ const ProductList = ({ addToCart }) => {
                 setProducts([...products, ...data]);
                 setNewProductName('');
                 setNewProductPrice('');
-                setShowAddProduct(false);
+                // setShowAddProduct(false);
             }
         }
     };

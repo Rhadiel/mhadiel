@@ -15,28 +15,64 @@ const Checkout = ({ cart, total, clearCart }) => {
     };
 
     const handleCheckout = async () => {
-        const change = payment - total;
-        if (change < 0) {
-            setMessage('Insufficient payment');
-            return;
+        if (!payment) {
+            setMessage('Purchase Pending');
+            const products = cart.map(item => `${item.name} x ${item.quantity}`).join(', ');
+
+            const { error } = await supabase
+                .from('purchases')
+                .insert([{ name, products, total, paid: payment, change: 0, status: 'Unpaid', amount_to_be_paid: total }]);
+
+            if (error) {
+                console.error('Error saving purchase:', error);
+                setMessage('Error saving purchase');
+            } else {
+                clearCart();
+                setName('');
+            }
+        } else {
+            const change = payment - total;
+            if (change < 0) {
+                setMessage('Insufficient payment');
+                return;
+            }
+
+            const products = cart.map(item => `${item.name} x ${item.quantity}`).join(', ');
+
+            const { error } = await supabase
+                .from('purchases')
+                .insert([{ name, products, total, paid: payment, change, status: 'Paid', amount_to_be_paid: 0 }]);
+
+            if (error) {
+                console.error('Error saving purchase:', error);
+                setMessage('Error saving purchase');
+            } else {
+                setMessage('Purchase successful');
+                clearCart();
+                setPayment('');
+                setName('');
+            }
         }
+    };
 
+    const handlePayLater = async () => {
+        setMessage('Purchase Pending');
         const products = cart.map(item => `${item.name} x ${item.quantity}`).join(', ');
-
+    
         const { error } = await supabase
             .from('purchases')
-            .insert([{ name, products, total, paid: payment, change, status: change >= 0 ? 'Paid' : 'Unpaid' }]);
-
+            .insert([{ name, products, total, paid: 0, change: total, status: 'Unpaid', amount_to_be_paid: total }]);
+    
         if (error) {
             console.error('Error saving purchase:', error);
             setMessage('Error saving purchase');
         } else {
-            setMessage('Purchase successful');
+            setMessage('Purchase Pending');
             clearCart();
-            setPayment('');
             setName('');
         }
     };
+    
 
     const change = payment - total;
 
@@ -62,6 +98,7 @@ const Checkout = ({ cart, total, clearCart }) => {
                 style={{ width: '49rem' }}
             />
             <button onClick={handleCheckout}>Pay</button>
+            <button onClick={handlePayLater}>Pay Later</button>
             <div className="checkout-change">
                 <span>Change: </span>
                 <span>{change >= 0 ? change.toFixed(2) : 'Insufficient payment'}</span>
