@@ -1,34 +1,55 @@
 import React, { useState } from 'react';
+import { supabase } from './supabase';
 
-const EditProduct = ({ product, products, setProducts, setShowEditProduct }) => {
-    const [editedName, setEditedName] = useState(product.name);
-    const [editedPrice, setEditedPrice] = useState(product.price);
+const EditProduct = ({ product, setProducts, products, setShowEditProduct }) => {
+    const [editedProductName, setEditedProductName] = useState(product.name);
+    const [editedProductPrice, setEditedProductPrice] = useState(product.price);
 
-    const handleSave = () => {
-        const updatedProducts = products.map(p => 
-            p.id === product.id ? { ...p, name: editedName, price: parseFloat(editedPrice) } : p
+    const handleSave = async () => {
+        const { data, error } = await supabase
+            .from('products')
+            .update({ name: editedProductName, price: editedProductPrice })
+            .eq('id', product.id)
+            .select('*');
+        
+        if (error) {
+            console.error('Error updating product:', error);
+            return;
+        }
+
+        // Update the products state with the updated product
+        const updatedProducts = products.map((p) => 
+            p.id === product.id ? data[0] : p
         );
+
         setProducts(updatedProducts);
         setShowEditProduct(false);
-    }
+    };
 
     return (
         <div className="edit-product">
-            <h2>Edit Product</h2>
-            <input 
-                type="text" 
-                value={editedName} 
-                onChange={e => setEditedName(e.target.value)} 
+            <h2 style={{textAlign:'center'}}>Edit Product</h2>
+            <input
+                type="text"
+                placeholder="Product name"
+                value={editedProductName}
+                onChange={(e) => setEditedProductName(e.target.value)}
+                style={{ width: '20rem', marginRight: '1rem', textAlign: 'center' }}
+                />
+            <input
+                type="number"
+                placeholder="Product price"
+                value={editedProductPrice}
+                onChange={(e) => setEditedProductPrice(e.target.value)}
+                style={{ width: '20rem', marginRight: '1rem', textAlign: 'center' }}
+
             />
-            <input 
-                type="number" 
-                value={editedPrice} 
-                onChange={e => setEditedPrice(e.target.value)} 
-            />
-            <button onClick={handleSave}>Save</button>
-            <button onClick={() => setShowEditProduct(false)}>Cancel</button>
+            <div className="button-group">
+                <button onClick={handleSave}>Save</button>
+                <button onClick={() => setShowEditProduct(false)}>Cancel</button>
+            </div>
         </div>
     );
-}
+};
 
 export default EditProduct;

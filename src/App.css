@@ -1,211 +1,311 @@
-/* General styling for the application */
-.app {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
-  color: #333;
-  padding: 20px;
+/* App.css */
+
+/* General Styles */
+body {
+  font-family: poppins, sans-serif;
+  background-color: #f4f7f6;
+  margin: 0;
+  padding: 0;
+}
+/* Add this to your existing CSS file (App.css) */
+
+/* Button styles for the added state */
+.add-to-cart-btn.added {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
 }
 
-/* Styling for the main content areas */
-.main-content {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-/* Shared styles for product-list, cart, and checkout sections */
-.product-list, .cart, .checkout {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  width: 30%;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  color: #007BFF;
-  font-size: 2.5em;
-  margin-bottom: 20px;
-}
 
 h2 {
-  color: #0056b3;
-  font-size: 1.8em;
-  margin-bottom: 10px;
-}
-
-h3 {
   color: #333;
-  font-size: 1.4em;
-  margin-top: 10px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  text-align: left;
-}
-
-/* Buttons styling */
 button {
-  background-color: #007BFF;
-  border: none;
+  background-color: #007bff;
   color: white;
-  padding: 10px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 2px;
+  border: none;
+  padding: 10px 20px;
   cursor: pointer;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
   border-radius: 5px;
-  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
-/* Specific button groups styling */
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-
-.add-to-cart-btn, .edit-btn {
-  margin-left: 10px;
-}
-
-/* Remove button styling */
-.remove-btn {
-  background-color: #dc3545;
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  margin-left: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.remove-btn:hover {
-  background-color: #c82333;
-}
-
-/* Clear cart button styling */
-.clear-btn {
-  background-color: #ffc107;
-  border: none;
-  color: white;
-  padding: 10px 15px;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.clear-btn:hover {
-  background-color: #e0a800;
-}
-
-/* Input fields styling */
 input[type="text"], input[type="number"] {
-  margin: 5px 0;
   padding: 10px;
-  width: calc(100% - 24px);
+  margin: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
+  width: 80%;
 }
+
+input[type="text"]:focus, input[type="number"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Container Styles */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.nav-item {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  background-color: transparent;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-item.active {
+  color: #007bff;
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* ProductList Styles */
+/* .product-list {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
 
 .product-list input[type="text"] {
-  margin-bottom: 10px;
+  width: calc(100% - 30px);
 }
 
-/* Specific styles for Cart component */
-.cart input[type="number"] {
-  width: 60px;
-  margin: 0 10px;
-  text-align: center;
+.product-list .button-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-/* Styles for list items */
-li {
+.product-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 0;
-  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
 }
 
-li:last-child {
+.product-list li:last-child {
   border-bottom: none;
 }
 
-/* Additional styles for headings */
-h1, h2, h3 {
-  margin: 0;
+.product-list .product-name {
+  flex: 1;
 }
 
-/* Add Product form styling */
+.product-list .product-price {
+  flex: 1;
+  text-align: center;
+}
+
+.product-list .add-to-cart-btn, .product-list .edit-btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* Add Product Form Styles */
 .add-product-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.edit-product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Cart Styles */
+/* .cart {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+.cart ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart li:last-child {
+  border-bottom: none;
+}
+
+.cart .cart-item-name {
+  flex: 2;
+}
+
+.cart .cart-item-price, .cart .cart-item-total {
+  flex: 1;
+  text-align: center;
+}
+
+.cart .cart-item input[type="number"] {
+  width: 50px;
+  text-align: center;
+}
+
+.cart .remove-btn {
+  background-color: #dc3545;
+}
+
+.cart .remove-btn:hover {
+  background-color: #c82333;
+}
+
+.cart .cart-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Checkout Styles */
+/* .checkout {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+.checkout .checkout-total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+}
+
+.checkout input[type="number"] {
+  width: calc(100% - 30px);
   margin: 10px 0;
 }
 
-/* Edit Product form styling */
-.edit-product {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  z-index: 1000;
-}
-
-/* Specific styles for product item */
-.product-item {
+.checkout .checkout-change {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
-.product-name {
-  flex: 2;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .product-list, .cart, .checkout {
+      width: 100%;
+  }
+
+  .product-list li, .cart li {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .product-list .product-price, .product-list .add-to-cart-btn, .product-list .edit-btn,
+  .cart .cart-item-price, .cart .cart-item input[type="number"], .cart .cart-item-total, .cart .remove-btn {
+      text-align: center;
+      margin-top: 10px;
+  }
 }
 
-.product-price {
-  flex: 1;
-  text-align: right;
-  margin-right: 10px;
+.checkout-total,
+.checkout-change {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-/* Specific styles for cart item */
-.cart-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.checkout-message {
+    color: green;
+    margin-top: 10px;
 }
 
-.cart-item-name {
-  flex: 2;
+.purchase-details {
+    margin-top: 20px;
 }
 
-.cart-item-price, .cart-item-total {
-  flex: 1;
-  text-align: right;
-  margin-right: 10px;
+.purchase-detail {
+    margin-bottom: 10px;
+    display: flex;
+}
+.divider {
+    margin-top: 10px;
+    border: none;
+    border-top: 1px solid #ccc;
+    width: 49rem;
 }
 
-/* Specific styles for cart total */
-.cart-total {
-  margin-top: 20px;
-  text-align: center;
+.detail-label {
+    font-weight: bold;
+    margin-right: 10px;
 }
+
+.detail-value {
+    flex: 1;
+}
+
+.status-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.status-button:hover {
+    background-color: #0056b3;
+}
+
+
+
