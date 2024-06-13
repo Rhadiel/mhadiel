@@ -18,10 +18,22 @@ const PurchaseHistory = () => {
         fetchPurchases();
     }, []);
 
-    const handleStatusChange = async (id, status) => {
+    const handleStatusChange = async (id, status, total, paid) => {
+        let updatedFields = {};
+        if (status === 'Paid') {
+            updatedFields = {
+                status: 'Paid',
+                amount_to_be_paid: 0,
+                paid: total,
+                change: 0 // Since it's fully paid, no change is needed
+            };
+        } else {
+            updatedFields = { status: 'Unpaid' };
+        }
+
         const { data, error } = await supabase
             .from('purchases')
-            .update({ status })
+            .update(updatedFields)
             .eq('id', id)
             .select('*');
         if (error) {
@@ -60,7 +72,10 @@ const PurchaseHistory = () => {
                                 <span className={`detail-value ${purchase.status === 'Paid' ? 'paid' : 'unpaid'}`}>
                                     {purchase.status}
                                 </span>
-                                <button className="status-button" onClick={() => handleStatusChange(purchase.id, purchase.status === 'Paid' ? 'Unpaid' : 'Paid')}>
+                                <button 
+                                    className="status-button" 
+                                    onClick={() => handleStatusChange(purchase.id, purchase.status === 'Paid' ? 'Unpaid' : 'Paid', purchase.total, purchase.paid)}
+                                >
                                     {purchase.status === 'Paid' ? 'Mark as Unpaid' : 'Mark as Paid'}
                                 </button>
                             </div>

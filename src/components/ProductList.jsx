@@ -10,7 +10,6 @@ const ProductList = ({ addToCart }) => {
     const [newProductName, setNewProductName] = useState('');
     const [newProductPrice, setNewProductPrice] = useState('');
     const [productToEdit, setProductToEdit] = useState(null);
-    const [showProductList, setShowProductList] = useState(false);
     const [addedProducts, setAddedProducts] = useState([]);
 
     useEffect(() => {
@@ -40,7 +39,6 @@ const ProductList = ({ addToCart }) => {
                 setProducts([...products, ...data]);
                 setNewProductName('');
                 setNewProductPrice('');
-                // setShowAddProduct(false);
             }
         }
     };
@@ -61,19 +59,22 @@ const ProductList = ({ addToCart }) => {
 
     return (
         <div className="product-list">
-            <h2 style={{ textAlign: 'center' }}>Products</h2>
+            <div className="header">
+                <h2 style={{ textAlign: 'center', display: 'inline', marginLeft:'20rem', fontSize:'2rem' }}>Products</h2>
+                <button 
+                    onClick={() => setShowAddProduct(true)} 
+                    style={{ float: 'right', marginRight: '1rem', marginTop: '.5rem' }}
+                >
+                    ADD PRODUCT
+                </button>
+            </div>
             <input
                 type="text"
                 placeholder="Search products"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
+                style={{ width: '48.2rem', marginBottom: '1rem', marginTop:'1rem', marginLeft:'-.4rem' }}
             />
-            <div className="button-group">
-                <button onClick={() => setShowAddProduct(true)} style={{ marginRight: '0.5rem' }}>ADD PRODUCT</button>
-                <button onClick={() => setShowProductList(!showProductList)}>
-                    {showProductList ? 'HIDE LIST' : 'DISPLAY LIST'}
-                </button>
-            </div>
 
             {showAddProduct && (
                 <div className="add-product-form">
@@ -98,24 +99,22 @@ const ProductList = ({ addToCart }) => {
                 </div>
             )}
 
-            {showProductList && (
-                <ul>
-                    {filteredProducts.map(product => (
-                        <li key={product.id} className="product-item">
-                            <span className="product-name">{product.name}</span>
-                            <span className="product-price">{product.price.toFixed(2)}</span>
-                            <button
-                                className={`add-to-cart-btn ${addedProducts.includes(product.id) ? 'added' : ''}`}
-                                onClick={() => handleAddToCart(product)}
-                                disabled={addedProducts.includes(product.id)}
-                            >
-                                {addedProducts.includes(product.id) ? 'Added' : 'Add to Cart'}
-                            </button>
-                            <button className="edit-btn" onClick={() => handleEditProduct(product)}>Edit</button>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <ul>
+                {filteredProducts.map(product => (
+                    <li key={product.id} className="product-item">
+                        <span className="product-name">{product.name}</span>
+                        <span className="product-price">{product.price.toFixed(2)}</span>
+                        <button
+                            className={`add-to-cart-btn ${addedProducts.includes(product.id) ? 'added' : ''}`}
+                            onClick={() => handleAddToCart(product)}
+                            disabled={addedProducts.includes(product.id)}
+                        >
+                            {addedProducts.includes(product.id) ? 'Added' : 'Add to Cart'}
+                        </button>
+                        <button className="edit-btn" onClick={() => handleEditProduct(product)}>Edit</button>
+                    </li>
+                ))}
+            </ul>
 
             {showEditProduct && (
                 <EditProduct

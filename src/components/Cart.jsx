@@ -1,7 +1,7 @@
-// src/Cart.jsx
+// src/components/Cart.jsx
 import React from 'react';
 
-const Cart = ({ cart, setCart }) => {
+const Cart = ({ cart, setCart, setView }) => {
     const handleRemove = (id) => {
         setCart(cart.filter(item => item.id !== id));
     };
@@ -15,6 +15,10 @@ const Cart = ({ cart, setCart }) => {
     };
 
     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+    const proceedToCheckout = () => {
+        setView('checkout');
+    };
 
     return (
         <div className="cart">
@@ -40,6 +44,7 @@ const Cart = ({ cart, setCart }) => {
                 <span>{total.toFixed(2)}</span>
             </div>
             <button onClick={clearCart}>Clear Cart</button>
+            <button onClick={proceedToCheckout}>Proceed to Checkout</button>
         </div>
     );
 };
